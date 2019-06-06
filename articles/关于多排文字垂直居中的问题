@@ -1,0 +1,25 @@
+关于多排文字垂直居中的问题
+需要居中的文字的父元素  display:table
+需要居中的文字         display: table-cell;
+                     vertical-align: middle;
+                     
+demo：
+
+
+//父元素
+.yydh-bumenfuwu li {
+    display: table;
+    height: 90px;
+    margin-left: 10px;
+    margin-top: 13px;
+}
+
+//子元素
+.yydh-bumenfuwu li a {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 0;
+    white-space: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+}
