@@ -1,0 +1,160 @@
+ Less教程
+
+一、安装
+
+    npm install -g less
+
+使用以下命令将style.less文件编译为style.css：
+
+    lessc style.less style.css
+
+二、嵌套规则
+
+可以向写网页一样的嵌套规则来使用less。
+
+三、操作
+
+可以使用变量，并使用数学运算变量前面需要使用@符号。
+
+    //style.less文件内容
+    @color:ccc;
+    @fontSize:10px;
+    
+    div{
+        font-size:@fontSize *99；
+        color:@color;
+    }
+    //以上代码编译出来以后会变成
+    div{
+        font-size:990px；
+        color:ccc;
+    }
+
+四、转义
+
+    //style.less
+    p{
+        color:~"pink";
+    }
+    转义字符之后双引号里面的东西，是什么就显示什么。
+
+五、函数
+
+可以直接在less使用函数
+
+    //style.less
+    @width:1.0;
+    div{
+        width:percentage(@width);
+    }
+
+六、命名空间和访问器
+
+    //style.less
+    .class1{
+        .class2{
+            .val(@fontSize){
+                font-size:@fontSize;
+            }
+        }
+    }
+    .class{
+        .class1 > class2 .val(20px);
+    }
+
+七、变量范围
+
+变量范围指定可用变量的位置。变量首先从本地作用域搜索，如果本地作用域不可用，就会从父作用域中搜索。
+
+    //style.less
+    @var: @a;
+    @a: 15px;
+    
+    .myclass {
+      font-size: @var;
+      @a:20px;
+      color: green;
+    }
+
+八、注释
+
+注释也只用加//即可，编译以后直接不会存在。
+
+    //style.less
+
+九、导入
+
+使用@import “绝对路径或者相对路径”
+
+    //style1.less
+    div{
+        color: #fff;
+    }
+
+    //style2.less
+    @import "./style.less"
+    div{
+        color:#000;
+    }
+
+十、拓展
+
+Extend是一个LESS伪类，它通过使用:extend 选择器在一个选择器中扩展其他选择器样式。 
+
+    //div1这个类会拥有div2这个类的样式
+    .div1{
+        &:extend(.div2);
+        color:#fff;
+    }
+    .div2{
+        background:#000;
+    }
+
+十一、混合
+
+在Less中允许一个类将另外一个类当做属性，其属性就是这个类的属性。
+
+    .div1{
+        color:pink;
+    }
+    .div2{
+        font-size:18px;
+        .div1();
+    }
+    .div3{
+        font-size:18px;
+        .div1;
+    }
+
+十二、混合参数
+
+    .border( @w; @s; @c){
+        border:@w @s @c;
+    }
+    //就可以使用十一的方式
+    div{
+        .border(1px;solid;#ccc);
+    }
+
+十三、循环
+
+    .cont(@count) when (@count > 0) {
+      .cont((@count - 1));
+      width: (25px * @count);
+    }
+    div {
+      .cont(7);
+    }
+
+十四、父选择器
+
+使用的是&
+
+    a {
+      color: red;
+      &:hover {
+        background-color: blue;
+      }
+    }
+
+参考文章：https://www.w3cschool.cn/less
